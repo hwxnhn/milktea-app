@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  KHACH_HANG
+  NHAN_VIEN
+  ADMIN
+}
+
+model KHACH_HANG {
+  MA_KH       String     @id @db.VarChar(50)
+  TEN         String?    @db.VarChar(100)
+  SDT         String?    @db.VarChar(15)
+  EMAIL       String?    @unique @db.VarChar(100)
+  MAT_KHAU    String?    @db.VarChar(255)
+  VAITRO      Role       @default(KHACH_HANG)
+  GOOGLE_ID   String?    @db.VarChar(100)
+  FACEBOOK_ID String?    @db.VarChar(100)
+  FCM_TOKEN   String?
+  DON_HANG    DON_HANG[]
+
+  @@map("KHACH_HANG")
+}
+
+model SAN_PHAM {
+  MA_SP             String              @id @db.VarChar(50)
+  TEN_SP            String?             @db.VarChar(100)
+  GIA_BAN           Decimal?            @db.Decimal(12, 2)
+  DANH_MUC          String?             @db.VarChar(50)
+  HINH_ANH          String?
+  TRANG_THAI_MON    Boolean?            @default(true)
+  CHI_TIET_DON_HANG CHI_TIET_DON_HANG[]
+
+  @@map("SAN_PHAM")
+}
+
+model TOPPING {
+  MA_TOPPING   String         @id @db.VarChar(50)
+  TEN_TOPPING  String?        @db.VarChar(100)
+  GIA_TOPPING  Decimal?       @db.Decimal(12, 2)
+  THEM_TOPPING THEM_TOPPING[]
+
+  @@map("TOPPING")
+}
+
+model DON_HANG {
+  MA_DH             String              @id @db.VarChar(50)
+  MA_KH             String?             @db.VarChar(50)
+  NGAY_DAT          DateTime?           @default(now())
+  TONG_TIEN         Decimal?            @db.Decimal(12, 2)
+  PHI_SHIP          Decimal?            @db.Decimal(12, 2)
+  TRANG_THAI        String?             @db.VarChar(30)
+  PTTT              String?             @db.VarChar(20)
+  MA_GIAO_DICH_CONG String?             @db.VarChar(100)
+  MA_VAN_DON        String?             @db.VarChar(100)
+  DIA_CHI_GIAO_HANG String?
+  LATITUDE          Decimal?            @db.Decimal(10, 8)
+  LONGITUDE         Decimal?            @db.Decimal(11, 8)
+  CHI_TIET_DON_HANG CHI_TIET_DON_HANG[]
+  KHACH_HANG        KHACH_HANG?         @relation(fields: [MA_KH], references: [MA_KH])
+
+  @@map("DON_HANG")
+}
+
+model CHI_TIET_DON_HANG {
+  MA_CHI_TIET  String         @id @db.VarChar(50)
+  MA_DH        String?        @db.VarChar(50)
+  MA_SP        String?        @db.VarChar(50)
+  SOLUONG      Int?
+  THANHTIEN    Decimal?       @db.Decimal(12, 2)
+  DON_HANG     DON_HANG?      @relation(fields: [MA_DH], references: [MA_DH])
+  SAN_PHAM     SAN_PHAM?      @relation(fields: [MA_SP], references: [MA_SP])
+  THEM_TOPPING THEM_TOPPING[]
+
+  @@map("CHI_TIET_DON_HANG")
+}
+
+model THEM_TOPPING {
+  MA_CHI_TIET       String            @db.VarChar(50)
+  MA_TOPPING        String            @db.VarChar(50)
+  CHI_TIET_DON_HANG CHI_TIET_DON_HANG @relation(fields: [MA_CHI_TIET], references: [MA_CHI_TIET])
+  TOPPING           TOPPING           @relation(fields: [MA_TOPPING], references: [MA_TOPPING])
+
+  @@id([MA_CHI_TIET, MA_TOPPING])
+  @@map("THEM_TOPPING")
+}
