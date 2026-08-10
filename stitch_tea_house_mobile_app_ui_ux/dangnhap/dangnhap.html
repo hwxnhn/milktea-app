@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Milk Tea Express - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9f9",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#773e00",
+                    "primary-fixed": "#ffdcc1",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#6e3900",
+                    "on-tertiary-fixed": "#2f1500",
+                    "on-primary-fixed": "#2e1500",
+                    "primary": "#006400",
+                    "accent": "#FF8C00",
+                    "on-tertiary-container": "#ffdcc3",
+                    "surface-tint": "#835425",
+                    "on-secondary-fixed-variant": "#005300",
+                    "inverse-primary": "#f9ba82",
+                    "inverse-surface": "#2f3131",
+                    "outline-variant": "#d5c3b6",
+                    "outline": "#837469",
+                    "on-background": "#1a1c1c",
+                    "tertiary-fixed-dim": "#ffb77d",
+                    "secondary-container": "#9bf585",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dadada",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "secondary": "#126e0c",
+                    "surface": "#f9f9f9",
+                    "primary-fixed-dim": "#f9ba82",
+                    "secondary-fixed-dim": "#82db6f",
+                    "inverse-on-surface": "#f1f1f1",
+                    "tertiary-container": "#9a5200",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-container": "#eeeeee",
+                    "tertiary-fixed": "#ffdcc3",
+                    "on-surface-variant": "#51443a",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#ffddc2",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#197211",
+                    "surface-bright": "#f9f9f9",
+                    "secondary-fixed": "#9df888",
+                    "surface-container-high": "#e8e8e8",
+                    "on-primary-fixed-variant": "#683d0f",
+                    "on-secondary-fixed": "#002200",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e2e2e2",
+                    "surface-container-low": "#f3f3f3",
+                    "primary-container": "#8b5a2b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "12px",
+                    "margin-mobile": "16px",
+                    "bottom-nav-height": "56px",
+                    "thumb-zone-padding": "24px",
+                    "touch-target-min": "48px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "title-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "400px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9f9f9;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .login-card {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 100, 0, 0.2);
+        }
+    </style>
+<style>
+    body {
+      width: 390px;
+      height: 844px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background flex flex-col">
+<!-- Top App Bar (Suppressing global nav based on "Transactional" rule) -->
+<header class="flex items-center justify-between px-margin-mobile h-14 w-full absolute top-0 z-50 bg-primary">
+<button class="w-10 h-10 flex items-center justify-center rounded-full active:bg-white/20 transition-colors">
+<span class="material-symbols-outlined text-white">arrow_back</span>
+</button>
+<h1 class="font-title-sm text-title-sm text-white font-bold">Milk Tea Express</h1>
+<div class="w-10"></div>
+</header>
+<main class="flex-grow pt-20 px-margin-mobile pb-32 flex flex-col overflow-y-auto">
+<!-- Brand Aesthetic Area -->
+<div class="mb-10 text-center">
+<div class="w-20 h-20 bg-primary/20 rounded-full mx-auto mb-6 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist high-quality close up of a steaming cup of milk tea with visible pearls at the bottom, captured in a clean, professional studio setting. The lighting is soft and natural, emphasizing the creamy texture and warm brown tones of the tea. The aesthetic is modern and refreshing, perfectly aligning with a premium minimalist beverage brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiRLXU5yxzIfmXjHKApNdF145vIcicx4HjYEnIiAefuQIhG6pO1zOeSAMcSBOFZTPq-YWGKlqgyvm8kdgnp4dcV8mKyyCUJ9TIXBam3cW7P1Fbd9IXLfcbylMzr_ltGmBTT-oius25CFCn9QK_jF3AXaA94U7XcWLLlIeQBWRGUS7a13DPeJxf-bBBoac-1rGJEFNeZrPJwasAIRXiUv5DzPGe_-vz3WFu8PtplZyM8w1BhGgBQq9P6w"/>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-background mb-2">Welcome Back</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Log in to start your tea journey</p>
+</div>
+<!-- Login Form Section -->
+<div class="space-y-6">
+<!-- Large Input Field: Email/Phone -->
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="login-id">Email or Phone Number</label>
+<div class="relative">
+<input autocomplete="username" class="w-full h-14 px-4 bg-surface-container-low border border-outline-variant rounded-xl font-body-lg text-body-lg focus:border-primary transition-all duration-200" id="login-id" placeholder="Enter your contact info" type="text"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline">contact_mail</span>
+</div>
+</div>
+<!-- Large Input Field: Password -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center px-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="password">Password</label>
+<button class="font-label-sm text-label-sm text-primary">Forgot?</button>
+</div>
+<div class="relative">
+<input autocomplete="current-password" class="w-full h-14 px-4 bg-surface-container-low border border-outline-variant rounded-xl font-body-lg text-body-lg focus:border-primary transition-all duration-200" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined" id="eye-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Biometric Quick Login Section -->
+<div class="pt-2 flex flex-col items-center space-y-4">
+<button class="flex items-center space-x-2 text-primary font-body-md py-2 px-4 rounded-full hover:bg-primary/10 transition-colors active:scale-95 duration-100">
+<span class="material-symbols-outlined">fingerprint</span>
+<span>Use FaceID or Fingerprint</span>
+</button>
+<div class="flex items-center w-full space-x-4 opacity-50">
+<div class="h-px bg-outline-variant flex-grow"></div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-outline">or continue with</span>
+<div class="h-px bg-outline-variant flex-grow"></div>
+</div>
+<!-- Google Login Option -->
+<button class="w-full h-12 flex items-center justify-center border border-outline-variant rounded-xl bg-surface hover:bg-surface-container-low transition-colors active:scale-[0.98]" style="transform: scale(1);">
+<svg class="w-5 h-5 mr-3" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="font-title-sm text-title-sm font-medium">Google Account</span>
+</button><button class="w-full h-12 flex items-center justify-center border border-outline-variant rounded-xl bg-surface hover:bg-surface-container-low transition-colors active:scale-[0.98]">
+<svg class="w-5 h-5 mr-3" fill="#1877F2" viewbox="0 0 24 24">
+<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+</svg>
+<span class="font-title-sm text-title-sm font-medium">Facebook Account</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Fixed Bottom CTA (Urgent / Primary) -->
+<footer class="absolute bottom-0 left-0 right-0 p-6 bg-surface shadow-[0_-8px_24px_rgba(0,0,0,0.05)]">
+<div class="max-w-md mx-auto space-y-4">
+<button class="w-full h-14 bg-accent text-white rounded-xl font-title-sm text-title-sm font-bold shadow-lg shadow-accent/20 active:scale-[0.97] transition-transform flex items-center justify-center">
+                Sign In
+            </button>
+<p class="text-center font-body-md text-body-md text-on-surface-variant">
+                Don't have an account? <a class="text-accent font-bold hover:underline" href="#">Create Account</a>
+</p>
+<!-- Safe Area Spacer for iOS -->
+<div class="h-2"></div>
+</div>
+</footer>
+<script>
+        function togglePassword() {
+            const passInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                eyeIcon.textContent = 'visibility_off';
+            } else {
+                passInput.type = 'password';
+                eyeIcon.textContent = 'visibility';
+            }
+        }
+
+        // Simple button interaction feedback
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.97)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Handle auto-fill background color cleanup
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                if(input.value.length > 0) {
+                    input.classList.add('bg-white');
+                    input.classList.remove('bg-surface-container-low');
+                } else {
+                    input.classList.add('bg-surface-container-low');
+                    input.classList.remove('bg-white');
+                }
+            });
+        });
+    </script>
+</body></html>

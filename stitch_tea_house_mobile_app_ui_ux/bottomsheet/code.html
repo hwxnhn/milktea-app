@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#f9f9f9",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#FF8C00",
+                    "primary-fixed": "#ccebc5",
+                    "on-error": "#ffffff",
+                    "primary": "#006400",
+                    "surface-tint": "#006400",
+                    "inverse-primary": "#a8d5a8",
+                    "inverse-surface": "#2f3131",
+                    "outline-variant": "#d1d5db",
+                    "outline": "#9ca3af",
+                    "on-background": "#1a1c1c",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dadada",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#1a1c1c",
+                    "surface": "#ffffff",
+                    "inverse-on-surface": "#f1f1f1",
+                    "tertiary-container": "#FF8C00",
+                    "surface-container-highest": "#e5e7eb",
+                    "surface-container": "#f3f4f6",
+                    "on-surface-variant": "#4b5563",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#003300",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f9f9f9",
+                    "surface-container-high": "#e5e7eb",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#f3f4f6",
+                    "surface-container-low": "#f9fafb",
+                    "primary-container": "#e8f5e9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "12px",
+                    "margin-mobile": "16px",
+                    "bottom-nav-height": "56px",
+                    "thumb-zone-padding": "24px",
+                    "touch-target-min": "48px"
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        .bottom-sheet-transition {
+            transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .backdrop-blur-overlay {
+            backdrop-filter: blur(8px);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    </style>
+<style>
+    body {
+      width: 390px;
+      height: 884px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-sans overflow-hidden" style="width: 390px; height: 844px; margin: 0 auto;">
+<!-- Top App Bar (Shared Component Anchor) -->
+<header class="fixed top-0 w-full z-50 bg-surface flex items-center justify-between px-margin-mobile h-14">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-70 transition-opacity">arrow_back</span>
+<h1 class="text-headline-md font-bold text-primary">Milk Tea Express</h1>
+</div>
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-70 transition-opacity">notifications</span>
+</header>
+<!-- Main Content Canvas (Menu Preview Background) -->
+<main class="pt-16 pb-bottom-nav-height px-margin-mobile h-screen overflow-y-auto">
+<div class="space-y-6 opacity-40 select-none pointer-events-none">
+<div class="flex overflow-x-auto gap-2 pb-2 -mx-margin-mobile px-margin-mobile no-scrollbar">
+<span class="px-4 py-2 bg-primary text-on-primary rounded-full text-label-sm whitespace-nowrap">Classic Milk Tea</span>
+<span class="px-4 py-2 bg-surface-container text-on-surface-variant rounded-full text-label-sm whitespace-nowrap">Fruit Tea</span>
+<span class="px-4 py-2 bg-surface-container text-on-surface-variant rounded-full text-label-sm whitespace-nowrap">Matcha Series</span>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl flex gap-4 border border-outline-variant">
+<div class="w-24 h-24 rounded-lg bg-surface-container-high shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A premium close-up of a classic brown sugar milk tea with dark pearls settling at the bottom. The lighting is soft and warm, emphasizing the creamy texture of the milk and the rich, glossy syrup. The aesthetic is clean, minimalist, and professional, reflecting a high-end cafe experience with a natural, earthy color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsZVSVNLzx1mvmPLTYzVGH_TE1J4qNIHrjxWG-bzsIwe-zphBM6o0LbshrZtaxXEQPl9i8Ze63Q7-Ac4KwPPWfZu2TSo5rS-_N_XCywfI-XAlyMWyoqtwLEBc58n5wp9Zwc2o9v_O6sq9X26r0i2HR_QWKwG3OpQVpTepQkWhLIlL-mGOMbIvYvjolZsTN1IA_flcq5PaKrHL129kJ4VgLExDfnOZ9pQKpi7hHAyHHEvVpMIGWItH2hg"/>
+</div>
+<div class="flex-1">
+<h3 class="text-title-sm text-on-surface">Signature Pearl Milk Tea</h3>
+<p class="text-on-surface-variant text-label-sm mt-1">Our best-selling classic black tea with creamy milk and chewy tapioca pearls.</p>
+<div class="mt-2 flex justify-between items-center">
+<span class="font-bold text-primary">$5.50</span>
+<span class="material-symbols-outlined text-primary p-1 bg-primary-fixed rounded-full">add</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar (Shared Component Anchor - Background State) -->
+<nav class="fixed bottom-0 w-full h-bottom-nav-height bg-surface flex justify-around items-center px-margin-mobile pb-safe z-10 border-t border-outline-variant">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1.5 transition-colors">
+<span class="material-symbols-outlined">local_cafe</span>
+<span class="text-label-sm">Menu</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-label-sm">Cart</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-label-sm">Orders</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="text-label-sm">Account</span>
+</div>
+</nav>
+<!-- Item Options Screen (Bottom Sheet) -->
+<div class="fixed inset-0 z-[60] backdrop-blur-overlay transition-opacity duration-300" id="bottomSheetBackdrop">
+<div class="fixed bottom-0 left-0 right-0 max-h-[835px] bg-surface rounded-t-[28px] z-[70] bottom-sheet-transition translate-y-0 flex flex-col shadow-2xl" id="bottomSheet">
+<!-- Handle -->
+<div class="flex justify-center py-4">
+<div class="w-8 h-1 rounded-full bg-outline-variant"></div>
+</div>
+<!-- Content -->
+<div class="overflow-y-auto px-margin-mobile pb-32">
+<!-- Header -->
+<div class="flex gap-4 mb-8">
+<div class="w-24 h-24 rounded-2xl overflow-hidden shrink-0 shadow-sm border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A top-down professional product shot of a high-quality signature pearl milk tea in a minimalist clear cup. The image highlights the rich golden-brown tea hue and the perfect spherical shape of the black pearls. Set against a clean, neutral background that aligns with a professional and minimalist milk tea brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg9OPIt__xBrMkzP-63pl9cnB-5Cm7SSf66-84QRrwYuWrGkpjl75angJNoH95zPPfuVpVhi8oQbfaZxcm7W86TVPwiSJBJLCIYNLZScslHN-0QlFdfShUAEa0AuA-AeLfsdjIzXoeeurjFWK2WxINe1q47lbPJZYR2Z8TTrf0256nPd2P-tj9PwGXSwY4VYjufMNzIexPXST7YwzG2YIYFUq5Y5_pkbNuIwWCwNNQOx3kpLOfnuL7qg"/>
+</div>
+<div class="flex flex-col justify-center">
+<h2 class="text-headline-md text-on-surface leading-tight font-bold">Signature Pearl Milk Tea</h2>
+<p class="text-primary font-bold text-title-sm mt-1">$5.50</p>
+</div>
+</div>
+<!-- Options Sections -->
+<form class="space-y-8" id="customizationForm">
+<!-- Size Selection (Radio Buttons) -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-title-sm text-on-surface font-semibold">Select Size</h3>
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface-variant text-[10px] uppercase font-bold rounded">Required</span>
+</div>
+<div class="space-y-3">
+<label class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent has-[:checked]:border-primary has-[:checked]:bg-primary-fixed cursor-pointer transition-all active:scale-[0.98]">
+<span class="flex flex-col">
+<span class="text-body-lg text-on-surface">Small</span>
+<span class="text-on-surface-variant text-label-sm">350ml</span>
+</span>
+<div class="relative flex items-center">
+<input checked="" class="peer hidden" name="size" type="radio" value="S"/>
+<div class="w-6 h-6 border-2 border-outline rounded-full peer-checked:border-primary flex items-center justify-center after:content-[''] after:w-3 after:h-3 after:bg-primary after:rounded-full after:scale-0 peer-checked:after:scale-100 transition-all"></div>
+</div>
+</label>
+<label class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent has-[:checked]:border-primary has-[:checked]:bg-primary-fixed cursor-pointer transition-all active:scale-[0.98]">
+<span class="flex flex-col">
+<span class="text-body-lg text-on-surface">Medium</span>
+<span class="text-on-surface-variant text-label-sm">500ml (+$0.50)</span>
+</span>
+<div class="relative flex items-center">
+<input class="peer hidden" name="size" type="radio" value="M"/>
+<div class="w-6 h-6 border-2 border-outline rounded-full peer-checked:border-primary flex items-center justify-center after:content-[''] after:w-3 after:h-3 after:bg-primary after:rounded-full after:scale-0 peer-checked:after:scale-100 transition-all"></div>
+</div>
+</label>
+<label class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent has-[:checked]:border-primary has-[:checked]:bg-primary-fixed cursor-pointer transition-all active:scale-[0.98]">
+<span class="flex flex-col">
+<span class="text-body-lg text-on-surface">Large</span>
+<span class="text-on-surface-variant text-label-sm">700ml (+$1.00)</span>
+</span>
+<div class="relative flex items-center">
+<input class="peer hidden" name="size" type="radio" value="L"/>
+<div class="w-6 h-6 border-2 border-outline rounded-full peer-checked:border-primary flex items-center justify-center after:content-[''] after:w-3 after:h-3 after:bg-primary after:rounded-full after:scale-0 peer-checked:after:scale-100 transition-all"></div>
+</div>
+</label>
+</div>
+</section>
+<!-- Toppings (Checkboxes) -->
+<section>
+<h3 class="text-title-sm text-on-surface mb-4 font-semibold">Add Toppings</h3>
+<div class="space-y-3">
+<label class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent has-[:checked]:border-primary has-[:checked]:bg-primary-fixed cursor-pointer transition-all active:scale-[0.98]">
+<span class="text-body-lg text-on-surface">Pearl (+$0.75)</span>
+<div class="relative flex items-center">
+<input class="peer hidden" name="topping" type="checkbox" value="pearl"/>
+<div class="w-6 h-6 border-2 border-outline rounded-lg peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-all">
+<span class="material-symbols-outlined text-white text-sm opacity-0 peer-checked:opacity-100">check</span>
+</div>
+</div>
+</label>
+<label class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent has-[:checked]:border-primary has-[:checked]:bg-primary-fixed cursor-pointer transition-all active:scale-[0.98]">
+<span class="text-body-lg text-on-surface">Jelly (+$0.75)</span>
+<div class="relative flex items-center">
+<input class="peer hidden" name="topping" type="checkbox" value="jelly"/>
+<div class="w-6 h-6 border-2 border-outline rounded-lg peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-all">
+<span class="material-symbols-outlined text-white text-sm opacity-0 peer-checked:opacity-100">check</span>
+</div>
+</div>
+</label>
+<label class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl border border-transparent has-[:checked]:border-primary has-[:checked]:bg-primary-fixed cursor-pointer transition-all active:scale-[0.98]">
+<span class="text-body-lg text-on-surface">Cream (+$0.95)</span>
+<div class="relative flex items-center">
+<input class="peer hidden" name="topping" type="checkbox" value="cream"/>
+<div class="w-6 h-6 border-2 border-outline rounded-lg peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-all">
+<span class="material-symbols-outlined text-white text-sm opacity-0 peer-checked:opacity-100">check</span>
+</div>
+</div>
+</label>
+</div>
+</section>
+<!-- Notes -->
+<section>
+<h3 class="text-title-sm text-on-surface mb-4 font-semibold">Special Requests</h3>
+<textarea class="w-full bg-surface-container-low border-outline-variant rounded-xl p-4 text-body-md focus:ring-primary focus:border-primary min-h-[100px] resize-none placeholder:text-on-surface-variant" placeholder="E.g., No ice, 50% sugar..."></textarea>
+</section>
+</form>
+</div>
+<!-- Footer Action Area -->
+<div class="absolute bottom-0 left-0 right-0 bg-surface px-margin-mobile py-6 border-t border-outline-variant shadow-[0_-8px_16px_rgba(0,0,0,0.04)]">
+<div class="flex items-center justify-between mb-6">
+<!-- Quantity Selector -->
+<div class="flex items-center bg-surface-container-high rounded-full p-1 border border-outline-variant">
+<button class="w-10 h-10 flex items-center justify-center text-primary active:scale-90 transition-transform" onclick="decrementQty()">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="w-10 text-center font-bold text-on-surface" id="quantityDisplay">1</span>
+<button class="w-10 h-10 flex items-center justify-center text-primary active:scale-90 transition-transform" onclick="incrementQty()">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<div class="text-right">
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Total Price</p>
+<p class="text-headline-md font-bold text-on-surface" id="totalPrice">$5.50</p>
+</div>
+</div>
+<button class="w-full h-14 bg-tertiary text-on-tertiary font-bold text-title-sm rounded-full flex items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-lg hover:brightness-110">
+<span class="material-symbols-outlined">shopping_cart</span>
+                    Add to Cart
+                </button>
+</div>
+</div>
+</div>
+<script>
+        let quantity = 1;
+        const basePrice = 5.50;
+        
+        function updateDisplay() {
+            document.getElementById('quantityDisplay').textContent = quantity;
+            const sizePrices = { 'S': 0, 'M': 0.50, 'L': 1.00 };
+            const selectedSize = document.querySelector('input[name="size"]:checked').value;
+            
+            let toppingPrice = 0;
+            document.querySelectorAll('input[name="topping"]:checked').forEach(cb => {
+                if (cb.value === 'pearl' || cb.value === 'jelly') toppingPrice += 0.75;
+                if (cb.value === 'cream') toppingPrice += 0.95;
+            });
+
+            const total = (basePrice + sizePrices[selectedSize] + toppingPrice) * quantity;
+            document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
+        }
+
+        function incrementQty() {
+            quantity++;
+            updateDisplay();
+        }
+
+        function decrementQty() {
+            if (quantity > 1) {
+                quantity--;
+                updateDisplay();
+            }
+        }
+
+        // Event listeners for real-time price updates
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', updateDisplay);
+        });
+
+        // Simple animation logic for the sheet
+        const backdrop = document.getElementById('bottomSheetBackdrop');
+        const sheet = document.getElementById('bottomSheet');
+
+        function toggleSheet(show) {
+            if (show) {
+                backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                sheet.style.transform = 'translateY(0)';
+            } else {
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+                sheet.style.transform = 'translateY(100%)';
+            }
+        }
+
+        // Close on backdrop click
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) toggleSheet(false);
+        });
+
+        // Initialize display
+        updateDisplay();
+    </script>
+</body></html>

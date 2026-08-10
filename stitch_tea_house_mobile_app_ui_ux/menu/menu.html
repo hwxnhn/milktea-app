@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, height=884, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Màn hình Menu (Trang chủ) - 390x884 (Bản sao)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            width: 390px;
+            height: 844px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .scroll-container {
+            height: calc(844px - 56px - 56px); /* Height minus header and bottom nav */
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#f9f9f9",
+                      "on-primary": "#ffffff",
+                      "tertiary": "#773e00",
+                      "primary-fixed": "#ffdcc1",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#6e3900",
+                      "on-tertiary-fixed": "#2f1500",
+                      "on-primary-fixed": "#2e1500",
+                      "primary": "#006400",
+                      "on-tertiary-container": "#ffdcc3",
+                      "surface-tint": "#835425",
+                      "on-secondary-fixed-variant": "#005300",
+                      "inverse-primary": "#f9ba82",
+                      "inverse-surface": "#2f3131",
+                      "outline-variant": "#d5c3b6",
+                      "outline": "#837469",
+                      "on-background": "#1a1c1c",
+                      "tertiary-fixed-dim": "#ffb77d",
+                      "secondary-container": "#9bf585",
+                      "error": "#ba1a1a",
+                      "surface-dim": "#dadada",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#1a1c1c",
+                      "secondary": "#FF8C00",
+                      "surface": "#f9f9f9",
+                      "primary-fixed-dim": "#f9ba82",
+                      "secondary-fixed-dim": "#82db6f",
+                      "inverse-on-surface": "#f1f1f1",
+                      "tertiary-container": "#9a5200",
+                      "surface-container-highest": "#e2e2e2",
+                      "surface-container": "#eeeeee",
+                      "tertiary-fixed": "#ffdcc3",
+                      "on-surface-variant": "#51443a",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-container": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-secondary-container": "#197211",
+                      "surface-bright": "#f9f9f9",
+                      "secondary-fixed": "#9df888",
+                      "surface-container-high": "#e8e8e8",
+                      "on-primary-fixed-variant": "#683d0f",
+                      "on-secondary-fixed": "#002200",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e2e2e2",
+                      "surface-container-low": "#f3f3f3",
+                      "primary-container": "#006400"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "12px",
+                      "margin-mobile": "16px",
+                      "bottom-nav-height": "56px",
+                      "thumb-zone-padding": "24px",
+                      "touch-target-min": "48px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "title-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface" style="height: 844px;">
+<!-- Fixed Header -->
+<header class="absolute top-0 w-full z-50 bg-surface flex items-center justify-between px-margin-mobile h-14 border-b border-outline-variant/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-70 transition-opacity">arrow_back</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Milk Tea Express</h1>
+</div>
+<div class="flex items-center">
+<button class="material-symbols-outlined text-primary p-2 hover:opacity-80 active:opacity-70 transition-opacity">notifications</button>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<main class="scroll-container pt-14 pb-4 bg-background" style="height: calc(844px - 56px - 56px);">
+<!-- Sticky Search & Categories Cluster (Relative within scroll container) -->
+<div class="sticky top-0 z-40 bg-surface/95 backdrop-blur-md pb-2">
+<div class="px-margin-mobile pt-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl pl-12 pr-4 h-12 focus:border-primary focus:ring-0 text-body-md transition-all outline-none" placeholder="Search your favorite drink..." type="text"/>
+</div>
+</div>
+<!-- Horizontal Category Tabs -->
+<div class="mt-4 overflow-x-auto hide-scrollbar">
+<div class="flex gap-2 px-margin-mobile pb-2">
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-full font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform">Milk Tea</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-label-sm text-label-sm whitespace-nowrap hover:bg-surface-container-highest active:scale-95 transition-transform">Fruit Tea</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-label-sm text-label-sm whitespace-nowrap hover:bg-surface-container-highest active:scale-95 transition-transform">Coffee</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-label-sm text-label-sm whitespace-nowrap hover:bg-surface-container-highest active:scale-95 transition-transform">Matcha</button>
+<button class="bg-surface-container-high text-on-surface-variant px-6 py-2 rounded-full font-label-sm text-label-sm whitespace-nowrap hover:bg-surface-container-highest active:scale-95 transition-transform">Seasonal</button>
+</div>
+</div>
+</div>
+<!-- Menu List -->
+<section class="px-margin-mobile pt-4 space-y-4">
+<!-- Featured Promo -->
+<div class="relative w-full h-40 rounded-xl overflow-hidden shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A professional food photography shot of a signature brown sugar milk tea" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB3FnlDxXxteyhCx0UcSyM2p-7mCq8Be045y1BpEHBFJtDe9Zm1rsQoNaFfceMKryzaSAnTZC8A7TyC8jXgmL0jkTgJgXstOG5-w_6clJVbzzE_1Us9GZBvppyupuw62mAPFoeiSmM_YBgt45tBCDEAMwUtgEjnr7xk0ducCHmWhS19CY2JzUJksp0WlrQdgDL8dLnLMSYC_XUe3zPabhESh4FKlH7na7-tosVsfJ1UptLsgKFsEC7Vtw')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center px-6">
+<span class="text-on-primary font-label-sm text-label-sm bg-tertiary w-fit px-2 py-0.5 rounded mb-2">HOT DEAL</span>
+<h2 class="text-on-primary font-headline-md text-headline-md leading-tight">Brown Sugar Boba<br/>20% OFF Today</h2>
+</div>
+</div>
+<!-- Menu Grid/List -->
+<div class="grid grid-cols-1 gap-4 mt-6">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-xl flex gap-4 hover:shadow-md transition-shadow">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbUnDxd08i11aM0KJWLGT0FFE6qEXLVX8kNc5K-9IEssuRAc0VWo0oC_xTPbo0mbm2ilUuVFzsHLiSzQoMiyUr1rhoz2xiMr0-xqGSutPcHUBGMWhWqYGwCOdf0dWO8GMReRTA42Onl5r_OuBs5l-5y65yvs_ZBHWWOAQFbv-XL6fkxFR7M5CUUYbcjMBtCLT8OWhoamIdXXeXv7h49FojvwZah0o0I6mZJ_Oz9bcdaR0fAwX3u7UyjQ"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">Classic Pearl Milk Tea</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Our signature Assam tea with creamy milk.</p>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-primary">$5.50</span>
+<button class="bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform shadow-sm">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-xl flex gap-4 hover:shadow-md transition-shadow">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfzlKMsT5dgamNkmynPiQkRe9i6OaqTEQPAfylAHzzhmk3NYzqQvUvCB-qnA5n2nIvX_tGZJd_FM0aD5qsGezrW8YlzqMbZ0mHWrRE_xqpvfTRJ0n151KAjVyCa7qPmsjCXJYRU6VlKlG4OzY0AcjIribCevoCU_g5MPIVXPyu1fcq5aZ0nJNh4LkwczuVn1bm-V58Bs_h3fQq3z2iv-Y1lF6gzeQYoiyFBGJcdGl_D_WYNWylfIOX6w"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">Taro Milk Tea</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Earthy purple taro blended with premium milk.</p>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-primary">$6.25</span>
+<button class="bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform shadow-sm">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-xl flex gap-4 hover:shadow-md transition-shadow">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvP89zlu8DpdbP4B4qP0ul88A2ZVB9aU4DwWK6U-f8ZsvUuFzhkQoS-qVxrXTlr1RunR82MjVBvEq7Eoe4pV0xwWYQ9eePPHeGBz5ZzEk_nssSCbwAFKl8DnQmo2WX-keJ9Bg2hq-jy1ozUApH0I2Z9lyVQFfqw7KPIdkOjWrshqbdtEbkomSvceyfEfYJVhn7aFNgqTLKNh9Cghzik9WplIxj9Nh9DlBMSmDe_YRv_xsG6W5krF9jnw"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">Uji Matcha Latte</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">High-grade Japanese matcha with fresh milk.</p>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-primary">$6.75</span>
+<button class="bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform shadow-sm">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-xl flex gap-4 hover:shadow-md transition-shadow">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKCGZoamHQ-ZiRfu3ijtyyHHjCOhLLbfiKbYOsZR9Rb603TbfLLmJXRJvxhglaRmM2eTqID6iPQaY_KZeb8MKsQmCV32Z1PzH5rv5wtStkBVF_3U7RbRu3POFpDWPfsPRhQ8lAP4tTSszQPqW1ZOEHwkXSBZ6eNaP4h2wJ0ZuQ3Tr7ACcMU-ydWb-WzRQTsrtlyeBkNNS9A-FJngA6_k7pOy1AWVLt-7vi8TS3n71GRGf_GqQdDXSWzw"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">Thai Milk Tea</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Strongly brewed Thai tea with condensed milk.</p>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-primary">$5.75</span>
+<button class="bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform shadow-sm">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-3 rounded-xl flex gap-4 hover:shadow-md transition-shadow">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYPS6GsqtDtLdUGamJSyGJfIfQJeBb7L-hJRkrpREgmm3fFrrNo-SIgKoqaEr6N6GtxcDwNRftjA4WY7B97GZy_DXtWrhCiR2CD9L6ZFKblH_qTYNRKK3pTwnmjnCI-Kt047TEPryzYfHa2XNqUaHYJXRnmvoBF2KvLo6jgWx0Isaqcm11GWxrxvFrhRt9Op3EqdoK-7O_ge0F5TIOr7ZSE61yrtOrbw0-6oQAEzBpW-SziJUAkcHWRQ"/>
+</div>
+<div class="flex-grow flex flex-col justify-between">
+<div>
+<h3 class="font-title-sm text-title-sm text-on-surface">Oolong Milk Tea</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Aromatic roasted oolong with a smooth finish.</p>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-title-sm text-title-sm text-primary">$5.50</span>
+<button class="bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center active:scale-90 transition-transform shadow-sm">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Thumb-zone floating action (Relative to fixed parent) -->
+<div class="absolute bottom-20 right-4 z-40">
+<button class="bg-secondary text-on-primary rounded-full px-6 h-14 shadow-xl flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-sm text-label-sm">View Cart (2)</span>
+</button>
+</div>
+<!-- Bottom Navigation Shell -->
+<nav class="absolute bottom-0 w-full h-bottom-nav-height bg-surface flex justify-around items-center px-margin-mobile shadow-[0_-1px_4px_0_rgba(0,0,0,0.04)] z-50">
+<!-- Active: Menu (Home) -->
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1.5 active:scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_cafe</span>
+<span class="font-label-sm text-label-sm mt-0.5">Menu</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-container-high transition-colors active:scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-sm text-label-sm mt-0.5">Cart</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-container-high transition-colors active:scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-sm text-label-sm mt-0.5">Orders</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-container-high transition-colors active:scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-0.5">Account</span>
+</button>
+</nav>
+<script>
+        // Simple Interaction logic
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(10);
+                }
+            });
+        });
+
+        // Search highlight interaction
+        const searchInput = document.querySelector('input');
+        if(searchInput) {
+            searchInput.addEventListener('focus', () => {
+                searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+            });
+            searchInput.addEventListener('blur', () => {
+                searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+            });
+        }
+
+        // Category Tab Switcher
+        const tabs = document.querySelectorAll('.hide-scrollbar button');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('bg-primary-container', 'text-on-primary-container');
+                    t.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                tab.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                tab.classList.add('bg-primary-container', 'text-on-primary-container');
+            });
+        });
+    </script>
+</body></html>

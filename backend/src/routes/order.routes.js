@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getAllOrders,
+  getMyOrders,
   getOrderById,
   createOrder,
   updateOrderStatus,
@@ -8,15 +9,19 @@ import {
 } from '../controllers/order.controller.js';
 import { authenticate } from '../middlewares/auth.middleware.js';
 import { authorize } from "../middlewares/authorize.middleware.js";
+
 const router = express.Router();
 
 // Áp dụng middleware authenticate cho TẤT CẢ các route đơn hàng
 router.use(authenticate);
 
-router.get('/', getAllOrders);
+// ✅ Route lấy đơn hàng CỦA CHÍNH KHÁCH HÀNG ĐANG ĐĂNG NHẬP
+router.get('/my-orders', getMyOrders);
+
+// Route của Admin / Nhân viên
+router.get('/', authorize("NHAN_VIEN", "ADMIN"), getAllOrders);
 router.get('/:MA_DH', getOrderById);
 router.post('/', createOrder);
-
 
 router.patch(
   "/:MA_DH/status",

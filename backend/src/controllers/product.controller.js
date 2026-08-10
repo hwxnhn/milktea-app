@@ -7,6 +7,7 @@ const MESSAGES = {
   INVALID_GIA_BAN: "Giá bán phải lớn hơn 0.",
   PRODUCT_NOT_FOUND: "Không tìm thấy sản phẩm.",
   PRODUCT_NAME_EXISTS: "Tên sản phẩm đã tồn tại.",
+  PRODUCT_CODE_EXISTS: "Mã sản phẩm đã tồn tại.",
   PRODUCT_IN_USE: "Sản phẩm đã được sử dụng trong đơn hàng, không thể xoá.",
   CREATE_SUCCESS: "Thêm sản phẩm thành công.",
   DELETE_SUCCESS: "Xoá sản phẩm thành công.",
@@ -27,9 +28,6 @@ const DEFAULT_LIMIT = 10;
 const MAX_LIMIT = 100;
 const MAX_MA_SP_RETRY = 5;
 
-/**
- * Helper chuẩn hoá response lỗi client-facing (đồng bộ với auth.controller.js).
- */
 const sendError = (res, statusCode, message) => {
   return res.status(statusCode).json({
     success: false,
@@ -37,10 +35,6 @@ const sendError = (res, statusCode, message) => {
   });
 };
 
-/**
- * Không trả error.message thô ra client, log đầy đủ ở server.
- * Chỉ lộ chi tiết khi NODE_ENV=development để tiện debug local.
- */
 const sendServerError = (res, error, context) => {
   console.error(`[product.controller] ${context}:`, error);
 
@@ -51,10 +45,6 @@ const sendServerError = (res, error, context) => {
   });
 };
 
-/**
- * Parse "true"/"false" từ query string thành Boolean thực sự.
- * Trả về undefined nếu giá trị không hợp lệ để bỏ qua filter đó.
- */
 const parseBooleanQuery = (value) => {
   if (value === "true") return true;
   if (value === "false") return false;
@@ -62,9 +52,7 @@ const parseBooleanQuery = (value) => {
 };
 
 /**
- * Sinh MA_SP dạng SP001, SP002... dựa trên giá trị số lớn nhất hiện có,
- * lấy qua raw SQL để tránh bug sort theo string (giống getNextMaKh trong
- * auth.controller.js).
+ * Sinh MA_SP tự động dạng SP001, SP002... khi client không truyền MA_SP
  */
 const getNextMaSp = async () => {
   const result = await prisma.$queryRaw`
@@ -78,27 +66,23 @@ const getNextMaSp = async () => {
   return `SP${String(nextNumber).padStart(3, "0")}`;
 };
 
-/**
- * Sinh MA_SP + insert, retry khi gặp race condition (P2002 trên PK MA_SP),
- * đồng bộ kỹ thuật với createCustomerWithRetry trong auth.controller.js.
- */
 const createProductWithRetry = async (productData) => {
   for (let attempt = 0; attempt < MAX_MA_SP_RETRY; attempt++) {
-    const maSp = await getNextMaSp();
+    const maSp = productData.MA_SP || (await getNextMaSp());
 
     try {
       return await prisma.sAN_PHAM.create({
         data: {
-          MA_SP: maSp,
           ...productData,
+          MA_SP: maSp,
         },
       });
     } catch (error) {
       const isMaSpConflict =
         error.code === "P2002" && error.meta?.target?.includes("MA_SP");
 
-      if (isMaSpConflict) {
-        continue; // thử lại với mã mới
+      if (isMaSpConflict && !productData.MA_SP) {
+        continue; // Chỉ retry nếu là mã tự sinh bị đụng độ
       }
 
       throw error;
@@ -108,10 +92,6 @@ const createProductWithRetry = async (productData) => {
   throw new Error("Không thể tạo mã sản phẩm sau nhiều lần thử.");
 };
 
-/**
- * Validate dữ liệu tạo sản phẩm. Trả về message lỗi đầu tiên gặp phải,
- * hoặc null nếu hợp lệ.
- */
 const validateCreateInput = ({ TEN_SP, GIA_BAN, DANH_MUC }) => {
   if (!TEN_SP || !TEN_SP.trim()) {
     return MESSAGES.MISSING_TEN_SP;
@@ -128,9 +108,6 @@ const validateCreateInput = ({ TEN_SP, GIA_BAN, DANH_MUC }) => {
   return null;
 };
 
-/**
- * Validate dữ liệu update (chỉ validate field nào thực sự được truyền).
- */
 const validateUpdateInput = ({ TEN_SP, GIA_BAN, DANH_MUC }) => {
   if (TEN_SP !== undefined && !TEN_SP.trim()) {
     return MESSAGES.MISSING_TEN_SP;
@@ -154,23 +131,19 @@ export const getAllProducts = async (req, res) => {
   try {
     const { page, limit, search, category, status } = req.query;
 
-    // Parse & chặn giá trị bất thường (page/limit âm, quá lớn...)
     const currentPage = Math.max(parseInt(page, 10) || DEFAULT_PAGE, 1);
     const pageSize = Math.min(
       Math.max(parseInt(limit, 10) || DEFAULT_LIMIT, 1),
       MAX_LIMIT
     );
 
-    // Chỉ thêm điều kiện filter khi query param thực sự được truyền,
-    // tránh where rỗng gây filter sai (vd: TRANG_THAI_MON: undefined vẫn ổn
-    // với Prisma, nhưng viết tường minh cho dễ đọc).
     const where = {};
 
     if (search) {
-      where.TEN_SP = {
-        contains: search,
-        mode: "insensitive",
-      };
+      where.OR = [
+        { TEN_SP: { contains: search, mode: "insensitive" } },
+        { MA_SP: { contains: search, mode: "insensitive" } },
+      ];
     }
 
     if (category) {
@@ -182,13 +155,12 @@ export const getAllProducts = async (req, res) => {
       where.TRANG_THAI_MON = parsedStatus;
     }
 
-    // Chạy song song đếm tổng + lấy dữ liệu trang hiện tại để giảm latency.
     const [total, products] = await Promise.all([
       prisma.sAN_PHAM.count({ where }),
       prisma.sAN_PHAM.findMany({
         where,
         select: LIST_SELECT_FIELDS,
-        orderBy: { TEN_SP: "asc" },
+        orderBy: { MA_SP: "asc" },
         skip: (currentPage - 1) * pageSize,
         take: pageSize,
       }),
@@ -233,18 +205,30 @@ export const getProductById = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    const { TEN_SP, GIA_BAN, DANH_MUC, HINH_ANH, TRANG_THAI_MON } = req.body;
+    const { MA_SP, TEN_SP, GIA_BAN, DANH_MUC, HINH_ANH, TRANG_THAI_MON } = req.body;
 
-    const validationError = validateCreateInput({ TEN_SP, GIA_BAN, DANH_MUC });
+    const numericPrice = Number(GIA_BAN);
+    const validationError = validateCreateInput({ TEN_SP, GIA_BAN: numericPrice, DANH_MUC });
     if (validationError) {
       return sendError(res, 400, validationError);
     }
 
     const normalizedTenSp = TEN_SP.trim();
     const normalizedDanhMuc = DANH_MUC.trim();
+    const normalizedMaSp = MA_SP ? MA_SP.trim() : undefined;
 
-    // Không cho phép trùng tên sản phẩm (case-insensitive để tránh
-    // "Trà sữa" và "trà sữa" bị coi là 2 sản phẩm khác nhau).
+    // 1. Kiểm tra trùng MA_SP nếu người dùng nhập tay
+    if (normalizedMaSp) {
+      const existingCode = await prisma.sAN_PHAM.findUnique({
+        where: { MA_SP: normalizedMaSp },
+        select: { MA_SP: true },
+      });
+      if (existingCode) {
+        return sendError(res, 409, MESSAGES.PRODUCT_CODE_EXISTS);
+      }
+    }
+
+    // 2. Kiểm tra trùng TÊN SẢN PHẨM
     const existingProduct = await prisma.sAN_PHAM.findFirst({
       where: {
         TEN_SP: {
@@ -259,18 +243,14 @@ export const createProduct = async (req, res) => {
       return sendError(res, 409, MESSAGES.PRODUCT_NAME_EXISTS);
     }
 
-    try {
-      await createProductWithRetry({
-        TEN_SP: normalizedTenSp,
-        GIA_BAN,
-        DANH_MUC: normalizedDanhMuc,
-        HINH_ANH: HINH_ANH ?? null,
-        TRANG_THAI_MON: TRANG_THAI_MON ?? true,
-      });
-    } catch (error) {
-      // Không trả lỗi Prisma trực tiếp cho client, xử lý qua catch chung.
-      throw error;
-    }
+    await createProductWithRetry({
+      ...(normalizedMaSp && { MA_SP: normalizedMaSp }),
+      TEN_SP: normalizedTenSp,
+      GIA_BAN: numericPrice,
+      DANH_MUC: normalizedDanhMuc,
+      HINH_ANH: HINH_ANH ?? null,
+      TRANG_THAI_MON: TRANG_THAI_MON ?? true,
+    });
 
     return res.status(201).json({
       success: true,
@@ -294,19 +274,17 @@ export const updateProduct = async (req, res) => {
       return sendError(res, 404, MESSAGES.PRODUCT_NOT_FOUND);
     }
 
-    const validationError = validateUpdateInput({ TEN_SP, GIA_BAN, DANH_MUC });
+    const numericPrice = GIA_BAN !== undefined ? Number(GIA_BAN) : undefined;
+    const validationError = validateUpdateInput({ TEN_SP, GIA_BAN: numericPrice, DANH_MUC });
     if (validationError) {
       return sendError(res, 400, validationError);
     }
 
-    // Chỉ build field thực sự được truyền trong body, tránh ghi đè bằng
-    // undefined/null ngoài ý muốn.
     const dataToUpdate = {};
 
     if (TEN_SP !== undefined) {
       const normalizedTenSp = TEN_SP.trim();
 
-      // Không cho phép đổi sang tên đã tồn tại ở SẢN PHẨM KHÁC.
       const duplicateProduct = await prisma.sAN_PHAM.findFirst({
         where: {
           TEN_SP: {
@@ -326,7 +304,7 @@ export const updateProduct = async (req, res) => {
     }
 
     if (GIA_BAN !== undefined) {
-      dataToUpdate.GIA_BAN = GIA_BAN;
+      dataToUpdate.GIA_BAN = numericPrice;
     }
 
     if (DANH_MUC !== undefined) {
@@ -338,7 +316,7 @@ export const updateProduct = async (req, res) => {
     }
 
     if (TRANG_THAI_MON !== undefined) {
-      dataToUpdate.TRANG_THAI_MON = TRANG_THAI_MON;
+      dataToUpdate.TRANG_THAI_MON = Boolean(TRANG_THAI_MON);
     }
 
     const updatedProduct = await prisma.sAN_PHAM.update({
@@ -369,14 +347,24 @@ export const deleteProduct = async (req, res) => {
       return sendError(res, 404, MESSAGES.PRODUCT_NOT_FOUND);
     }
 
-    // Kiểm tra sản phẩm đã từng nằm trong đơn hàng chưa trước khi cho xoá,
-    // tránh phá vỡ tính toàn vẹn dữ liệu lịch sử đơn hàng.
+    // Kiểm tra sản phẩm đã từng nằm trong đơn hàng chưa
     const usageCount = await prisma.cHI_TIET_DON_HANG.count({
       where: { MA_SP },
     });
 
     if (usageCount > 0) {
-      return sendError(res, 409, MESSAGES.PRODUCT_IN_USE);
+      // Tự động chuyển sang Ngừng bán nếu đã từng được mua để bảo toàn dữ liệu lịch sử
+      const updatedProduct = await prisma.sAN_PHAM.update({
+        where: { MA_SP },
+        data: { TRANG_THAI_MON: false },
+        select: LIST_SELECT_FIELDS,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Sản phẩm đã có trong đơn hàng lịch sử. Đã chuyển trạng thái sang Ngừng bán.",
+        data: updatedProduct,
+      });
     }
 
     await prisma.sAN_PHAM.delete({

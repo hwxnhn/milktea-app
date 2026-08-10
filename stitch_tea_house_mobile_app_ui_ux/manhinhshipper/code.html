@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Màn hình Shipper (Ứng dụng giao hàng) - 390x884 (Bản sao)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            width: 390px;
+            height: 884px;
+            margin: 0 auto;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .order-path-gradient {
+            background: linear-gradient(180deg, #006400 0%, #cce0cc 100%);
+        }
+    </style>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "secondary": "#126e0c",
+                "on-tertiary-fixed": "#2f1500",
+                "surface-bright": "#f9f9f9",
+                "tertiary-container": "#9a5200",
+                "surface-container": "#eeeeee",
+                "outline-variant": "#d5c3b6",
+                "tertiary-fixed-dim": "#ffb77d",
+                "background": "#f9f9f9",
+                "on-primary-fixed": "#002200",
+                "on-tertiary-container": "#ffdcc3",
+                "on-primary-fixed-variant": "#004d00",
+                "inverse-surface": "#2f3131",
+                "on-background": "#1a1c1c",
+                "on-error-container": "#93000a",
+                "outline": "#837469",
+                "surface-container-lowest": "#ffffff",
+                "on-surface-variant": "#51443a",
+                "primary": "#006400",
+                "surface-container-highest": "#e2e2e2",
+                "inverse-on-surface": "#f1f1f1",
+                "on-secondary-fixed-variant": "#005300",
+                "on-secondary-fixed": "#002200",
+                "on-primary": "#ffffff",
+                "tertiary": "#773e00",
+                "on-secondary": "#ffffff",
+                "on-tertiary-fixed-variant": "#6e3900",
+                "on-error": "#ffffff",
+                "secondary-container": "#9bf585",
+                "inverse-primary": "#82db6f",
+                "on-secondary-container": "#197211",
+                "primary-fixed-dim": "#82db6f",
+                "on-surface": "#1a1c1c",
+                "tertiary-fixed": "#ffdcc3",
+                "surface-container-low": "#f3f3f3",
+                "secondary-fixed-dim": "#82db6f",
+                "primary-container": "#004d00",
+                "surface-container-high": "#e8e8e8",
+                "error-container": "#ffdad6",
+                "surface-variant": "#e2e2e2",
+                "surface-dim": "#dadada",
+                "surface": "#f9f9f9",
+                "on-tertiary": "#ffffff",
+                "primary-fixed": "#cce0cc",
+                "error": "#ba1a1a",
+                "surface-tint": "#006400",
+                "on-primary-container": "#ccffcc",
+                "secondary-fixed": "#9df888"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "gutter": "12px",
+                "bottom-nav-height": "56px",
+                "thumb-zone-padding": "24px",
+                "margin-mobile": "16px",
+                "touch-target-min": "48px"
+        },
+        "fontFamily": {
+                "display-lg": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "title-sm": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "label-sm": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "display-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "title-sm": [
+                        "18px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.5px",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+</head>
+<body class="bg-background text-on-surface" style="font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; width: 390px; height: 844px; margin: 0 auto; position: relative; overflow-x: hidden;">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full max-w-[390px] mx-auto left-0 right-0 z-50 bg-surface flex items-center justify-between px-margin-mobile h-14">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-full active:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-primary text-2xl">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Delivery Detail</h1>
+</div>
+<button class="flex items-center justify-center w-10 h-10 rounded-full active:opacity-70 transition-opacity">
+<span class="material-symbols-outlined text-primary text-2xl">notifications</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="pt-20 pb-32 px-margin-mobile space-y-6">
+<!-- Delivery Status Card -->
+<section class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between border border-outline-variant">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Status</span>
+<span class="font-title-sm text-title-sm text-primary font-bold">Out for Delivery</span>
+</div>
+<div class="h-12 w-12 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary fill-icon">delivery_dining</span>
+</div>
+</section>
+<!-- Map Preview / Location -->
+<section class="relative h-48 rounded-xl overflow-hidden border border-outline-variant shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A clean, minimalist vector map illustration of a city district in the style of a modern delivery app. The map uses a soft palette of light greys, whites, and subtle browns to match the Milk Tea Express brand. A small tea-cup shaped pin identifies the destination point. The lighting is bright and overhead, simulating a sunny day for high readability." data-location="Taipei City" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDyjXzI2dB8Dk3yoyB5l1iZbTtkvi6CwLxkY00EXCslVsn-zHd1TEo4_8jXmFbS_7Hr2M3PRAXPQxNoej12sZrBeBSVqH8eqIc72bSUbrMJgbZjT9sIQinsorEncTcoPB6BJMPBD9rAct0YjBh7e7p8Q6g35mXfZdn62OpaDDHBeVZ5Mw0KplBNttLPUP4m2mN0lcPBPtNfyGhlCt53bKG7B0zfyeKe8U7fUbXyKb1XSD7yrNXgYjr6mg')"></div>
+<div class="absolute bottom-3 left-3 right-3 glass-card p-3 rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">distance</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">1.2 km to destination (est. 4 mins)</span>
+</div>
+</section>
+<!-- Order Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant shadow-sm space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-title-sm text-title-sm text-on-surface">Alex Thompson</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Order #MTE-8842</p>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-[10px] font-bold uppercase tracking-tight">Paid Online</div>
+</div>
+<div class="h-px bg-outline-variant w-full"></div>
+<!-- Items -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<div class="flex gap-3 items-center">
+<div class="w-10 h-10 rounded bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A high-quality close-up of a classic pearl milk tea in a clear plastic cup with large black tapioca pearls at the bottom. The drink has a rich, creamy brown color and a thick straw. The background is a clean, minimalist off-white surface with soft natural lighting, emphasizing the refreshing and artisanal quality of the tea." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxxlbU6KdulV_75-gSmg5026xfFkaPZbzTBsZf1gocW8Q13jzriIBGRubAcq5KIAbJo7ZomiQpbjZSrfL1UA6mbxuV-_yZwaoABOdwZ8QBQGJ7tSxbEYrFxbIdJZpN4OrNYquCgQ-ugnlQzeprlb7Vgx3ERRio14ykds7RngpATHmMFxmQmtKfDiUJcu_X7CaiQc-_hB7OcO1upq71XYabAp06uwIU8aay0lnK_TPk4WfYcSaoJk1x3Q"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">Classic Pearl Milk Tea</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">L • 50% Sugar • No Ice</span>
+</div>
+</div>
+<span class="font-body-md text-body-md font-bold text-on-surface">x1</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex gap-3 items-center">
+<div class="w-10 h-10 rounded bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A vibrant, refreshing Thai Milk Tea in a tall glass cup, showing its signature bright orange color and a creamy white milk layer on top. The photo is taken in a professional studio setting with soft side lighting that highlights the condensation on the glass. The aesthetic is clean, professional, and thirst-quenching." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNJKdbgDbaF6vJbGFRJD56GKeTIZdtncGEvMkvgE91IOmjfRMvLNhJQRtgOplEoHYBbj1JTSLlF3Py4n1GGqTtlTxBHZ5M78D8xNsonIcqluDBqZI6G9TTK0fUPUotFB2lqYwfmkN8D-5HuRZuP3bI1bQrPekWx8040JDr1ZsxG5EZsbvRo-7LGU94lyU3iLYveSEezBqpdTPNRccudd5ik9_BgDZd5laJsJAm2wkZRDLm2PARuiBt9g"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">Thai Milk Tea</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">M • 100% Sugar • Regular Ice</span>
+</div>
+</div>
+<span class="font-body-md text-body-md font-bold text-on-surface">x1</span>
+</div>
+</div>
+<div class="h-px bg-outline-variant w-full"></div>
+<!-- Address -->
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-1">location_on</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Delivery Address</span>
+<span class="font-body-md text-body-md text-on-surface font-medium leading-relaxed">Room 1204, Building B, Modern Tech Park, No. 88 East Road</span>
+<span class="font-body-md text-body-md text-tertiary mt-1 italic">Note: Please leave at the reception desk.</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Buttons -->
+<div class="fixed bottom-32 right-margin-mobile flex flex-col gap-4 z-50" style="margin-right: calc(50vw - 195px); right: 16px;">
+<button class="w-14 h-14 rounded-full bg-surface-container-highest shadow-lg flex items-center justify-center text-primary active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl">phone</span>
+</button>
+<button class="w-14 h-14 rounded-full bg-primary-container shadow-lg flex items-center justify-center text-on-primary-container active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl fill-icon">map</span>
+</button>
+</div>
+<!-- Sticky Bottom Action Bar -->
+<div class="fixed bottom-0 w-full max-w-[390px] mx-auto left-0 right-0 bg-surface border-t border-outline-variant px-margin-mobile pt-4 pb-10 z-50">
+<button class="w-full bg-[#FF8C00] text-[#ffffff] font-title-sm text-title-sm py-4 rounded-xl shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2" id="markDelivered">
+<span class="material-symbols-outlined">check_circle</span>
+            Mark as Delivered
+        </button>
+</div>
+<!-- Success Feedback Overlay (Hidden by default) -->
+<div class="fixed inset-0 max-w-[390px] mx-auto left-0 right-0 bg-background/95 z-[60] flex flex-col items-center justify-center p-margin-mobile hidden" id="successOverlay">
+<div class="w-24 h-24 rounded-full bg-secondary-container flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-secondary-container text-6xl">verified</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary text-center">Delivery Confirmed</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant text-center mt-2">The customer has been notified. Great job!</p>
+<button class="mt-10 px-8 py-3 bg-surface-container-highest rounded-full font-title-sm text-title-sm text-on-surface active:scale-95 transition-transform" onclick="window.location.reload()">
+            Back to Orders
+        </button>
+</div>
+<!-- Bottom Navigation (Shared Component Logic) -->
+<nav class="fixed bottom-0 w-full max-w-[390px] mx-auto left-0 right-0 h-bottom-nav-height bg-surface flex justify-around items-center px-margin-mobile pb-safe z-40 md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">local_cafe</span>
+<span class="font-label-sm text-label-sm">Menu</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-sm text-label-sm">Cart</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1.5">
+<span class="material-symbols-outlined fill-icon">receipt_long</span>
+<span class="font-label-sm text-label-sm">Orders</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</div>
+</nav>
+<script>
+        const markBtn = document.getElementById('markDelivered');
+        const overlay = document.getElementById('successOverlay');
+
+        markBtn.addEventListener('click', () => {
+            markBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Processing...';
+            markBtn.classList.add('opacity-80');
+            markBtn.disabled = true;
+
+            setTimeout(() => {
+                overlay.classList.remove('hidden');
+                overlay.classList.add('animate-in', 'fade-in', 'duration-500');
+            }, 1200);
+        });
+
+        // Simple haptic feedback simulation
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(10);
+                }
+            });
+        });
+    </script>
+</body></html>
